@@ -1,53 +1,50 @@
-const Hero = ({ title, bgImage, subtitle }) => {
-  const stats = [
-    { label: 'Founded in', value: '1985' },
-    { label: 'Campus Area', value: '15 Acres' },
-    { label: 'Students', value: '4500+' },
-    { label: 'Alumni', value: '12000+' },
-  ];
-
+export default function Hero() {
   return (
-    <section className="relative w-full overflow-hidden">
-      {/* Background Image / Overlay */}
-      <div 
-        className="relative bg-black/60 bg-cover bg-center h-[50vh] min-h-[350px] flex flex-col justify-center items-center text-center px-4"
-        style={{ backgroundImage: `url(${bgImage || 'https://images.unsplash.com/photo-1541339907198-e08756defe33?q=80&w=2000'})` }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-
-        <div className="relative z-10 text-white flex flex-col items-center">
-          <div className="bg-[#112F55] text-white py-2 px-6 rounded-full flex items-center gap-3 mb-6 shadow-md">
-            <div className="w-8 h-8 rounded-full bg-[#1C4177] flex items-center justify-center font-bold text-sm">S</div>
-            <h1 className="text-xl md:text-2xl font-semibold tracking-tight">
-              {title || 'SPS. Excellence in Education'}
-            </h1>
+    <section className="relative h-[600px] lg:h-[800px] flex items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img 
+          alt="SPS Campus" 
+          className="w-full h-full object-cover" 
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYnVgrQJhhHI4exvTtWJGHY81edbig-lO9RNUZdYTZzR42RHV0r_KXoXaffaTMPpWQrRuOPIufQOxrCutIAARpB6j65pNDyrX7LQ4twstlm1K4weRr060ihowUOSvXt9kC46z2yfyfdfbMw_Em4PYpxmZuDtbiezu6hzBhssdRgc4V0aIyWf-JT0ohvZ1pv-0bhJMBsQCs6jQHz4z77IOGFarOy-1pC1rcY1v-0vXXSUt2zB4PF9w6A-Hsa_fLR2eHIohuj5v2XQ"
+        />
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-16 w-full">
+        <div className="max-w-3xl space-y-8 text-white">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs border border-white/30">
+            <span className="w-2 h-2 rounded-full bg-[#fdd355] animate-pulse"></span>
+            Admissions Open for Session 2024-25
           </div>
-
-          {subtitle && (
-            <p className="max-w-2xl text-base md:text-lg text-gray-200">
-              {subtitle}
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Angle cut & Stats Section */}
-      <div className="relative w-full h-16 bg-white overflow-hidden -mt-10 z-20">
-        <div className="absolute top-0 right-0 bottom-[-100px] left-[-200px] bg-white transform rotate-[-3deg] origin-bottom-right"></div>
-      </div>
-
-      <div className="bg-white pb-6 z-30 relative">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-around gap-4 text-center">
-          {stats.map((stat, index) => (
-            <div key={index} className="flex-1">
-              <div className="text-3xl font-extrabold text-[#F8A411]">{stat.value}</div>
-              <p className="text-xs font-semibold text-[#0A2540] uppercase tracking-wider">{stat.label}</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            Shaping <span className="text-[#ffe08b]">Visionaries</span> Through Academic Excellence.
+          </h2>
+          <p className="text-base sm:text-lg text-white/90 max-w-xl font-normal leading-relaxed">
+            SPS provides a holistic learning environment blending modern STEM education with core values, preparing students for global leadership.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <button className="bg-gradient-to-br from-[#003f83] to-[#001b3f] text-white px-10 py-4 rounded-xl font-medium shadow-[0_10px_30px_-10px_rgba(13,44,84,0.08)] hover:scale-105 transition-all">
+              Register Now
+            </button>
+            <button className="bg-white/10 backdrop-blur-md border border-white/30 px-10 py-4 rounded-xl font-medium text-white hover:bg-white/20 transition-all">
+              Learn More
+            </button>
+          </div>
+          <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/20">
+            <div>
+              <p className="text-xl sm:text-2xl font-bold text-[#ffe08b]">5000+</p>
+              <p className="text-[10px] sm:text-xs text-white/70 uppercase tracking-wider font-semibold">Students</p>
             </div>
-          ))}
+            <div>
+              <p className="text-xl sm:text-2xl font-bold text-[#ffe08b]">12</p>
+              <p className="text-[10px] sm:text-xs text-white/70 uppercase tracking-wider font-semibold">Campuses</p>
+            </div>
+            <div>
+              <p className="text-xl sm:text-2xl font-bold text-[#ffe08b]">40+</p>
+              <p className="text-[10px] sm:text-xs text-white/70 uppercase tracking-wider font-semibold">Years</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}
