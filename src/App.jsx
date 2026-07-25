@@ -14,7 +14,7 @@ function App() {
         <Navbar/>
         
         {/* Main page content changes based on path */}
-        <main className="flex-grow">
+        <main className="grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

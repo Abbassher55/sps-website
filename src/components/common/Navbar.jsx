@@ -38,7 +38,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-page-bg shadow-sm border-b border-card-border/40 transition-colors duration-300">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-16 h-20 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-16 h-20 flex justify-between items-center">
         
         {/* SPS Logo */}
         <div className="flex items-center gap-4">
