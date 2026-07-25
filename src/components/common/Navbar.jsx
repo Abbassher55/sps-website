@@ -116,7 +116,7 @@ export default function Navbar() {
           {/* Call to Action */}
           <Link 
             to="/register" 
-            className="hidden sm:block bg-brand-primary text-white dark:bg-blue-500 dark:text-gray-950 px-8 py-3 rounded-xl font-medium text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
+            className="hidden sm:block bg-brand-primary text-white  dark:bg-[#c5a853]   px-8 py-3 rounded-xl font-medium text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
           >
             Register Now
           </Link>
