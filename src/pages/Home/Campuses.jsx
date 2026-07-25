@@ -1,4 +1,3 @@
-
 const campuses = [
   {
     name: "Mingora Campus",
@@ -22,35 +21,53 @@ const campuses = [
 
 export default function Campuses() {
   return (
-    <section className="py-20 max-w-[1280px] mx-auto px-4 md:px-16">
+    <section className="py-20 dark:bg-surface-dim max-w-7xl mx-auto px-4 md:px-16 transition-colors duration-300">
+      {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
         <div>
-          <p className="font-label-md text-primary tracking-[0.2em] uppercase">Our Footprint</p>
-          <h2 className="font-headline-lg text-on-background text-4xl font-bold">State-of-the-Art Campuses</h2>
+          <p className="font-label-md text-primary dark:text-secondary tracking-[0.2em] uppercase font-semibold">
+            Our Footprint
+          </p>
+          <h2 className="font-headline-lg text-on-background dark:text-on-surface text-4xl font-bold">
+            State-of-the-Art Campuses
+          </h2>
         </div>
-        <button className="bg-white border border-outline-variant px-8 py-3 rounded-xl font-label-md hover:bg-surface-container transition-all">
+        <button className="bg-white dark:bg-surface-container-high border border-outline-variant dark:border-outline-variant/40 px-8 py-3 rounded-xl font-label-md text-on-surface dark:text-on-surface hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all shadow-sm">
           Find on Map
         </button>
       </div>
 
+      {/* Cards Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {campuses.map((campus, idx) => (
-          <div key={idx} className="bg-white rounded-[2rem] overflow-hidden border border-outline-variant premium-shadow group">
+          <div 
+            key={idx} 
+            className="bg-white dark:bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant dark:border-outline-variant/30 premium-shadow group transition-all duration-300 hover:-translate-y-1"
+          >
+            {/* Image Banner */}
             <div className="h-64 relative overflow-hidden">
               <img 
                 alt={campus.name} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 src={campus.image} 
               />
-              <span className="absolute top-4 left-4 bg-white/95 backdrop-blur px-4 py-2 rounded-full text-label-sm font-bold text-primary">
+              <span className="absolute top-4 left-4 bg-white/90 dark:bg-surface-container-highest/90 backdrop-blur px-4 py-1.5 rounded-full text-xs font-semibold text-primary dark:text-white border border-outline-variant/20 shadow-sm">
                 Active Campus
               </span>
             </div>
+
+            {/* Card Body */}
             <div className="p-8">
-              <h4 className="font-headline-md text-2xl font-bold text-on-background mb-2">{campus.name}</h4>
-              <p className="text-label-sm text-primary font-semibold mb-4">{campus.type}</p>
-              <p className="text-body-md text-on-surface-variant flex items-start gap-2">
-                <span className="material-symbols-outlined text-primary text-base mt-1">location_on</span>
+              <h3 className="font-headline-md text-2xl font-bold text-on-background dark:text-on-surface mb-2">
+                {campus.name}
+              </h3>
+              <p className="text-label-sm text-primary dark:text-slate-400 font-semibold mb-4">
+                {campus.type}
+              </p>
+              <p className="text-body-md text-on-surface-variant dark:text-secondary flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-base mt-1 select-none shrink-0 dark:text-secondary">
+                  location_on
+                </span>
                 {campus.address}
               </p>
             </div>

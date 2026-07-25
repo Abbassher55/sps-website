@@ -15,23 +15,45 @@ export default function Messages() {
   ];
 
   return (
-    <section className="py-20 max-w-[1280px] mx-auto px-4 md:px-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {leaders.map((leader, idx) => (
-          <div key={idx} className="flex flex-col md:flex-row gap-8 items-center md:items-start bg-white p-8 rounded-[2rem] border border-[#c2c6d3] shadow-[0_10px_30px_-10px_rgba(13,44,84,0.08)]">
-            <div className="w-32 h-32 shrink-0 rounded-full overflow-hidden border-4 border-[#e5eeff]">
-              <img className="w-full h-full object-cover" src={leader.img} alt={leader.name} />
-            </div>
-            <div className="space-y-4 text-center md:text-left">
-              <span className="material-symbols-outlined text-4xl text-[#003f83]/20">format_quote</span>
-              <p className="italic text-sm sm:text-base text-[#424751] leading-relaxed">"{leader.quote}"</p>
-              <div>
-                <p className="text-base sm:text-lg font-semibold text-[#003f83]">{leader.name}</p>
-                <p className="text-[10px] sm:text-xs text-[#424751] uppercase tracking-wider font-semibold">{leader.title}</p>
+    <section className="py-16 lg:py-20 bg-surface-container-low dark:bg-surface-dim transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {leaders.map((leader, idx) => (
+            <div 
+              key={idx} 
+              className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-start bg-surface-container-lowest dark:bg-surface-container p-6 sm:p-8 rounded-3xl border border-outline-variant/40 premium-shadow transition-colors duration-300"
+            >
+              {/* Leader Photo */}
+              <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-full overflow-hidden border-4 border-primary-container/60 dark:border-primary-container/30">
+                <img 
+                  className="w-full h-full object-cover" 
+                  src={leader.img} 
+                  alt={leader.name} 
+                />
+              </div>
+
+              {/* Quote & Info */}
+              <div className="space-y-3 text-center sm:text-left flex-1">
+                <span className="material-symbols-outlined text-4xl text-primary/20 dark:text-primary-fixed/20 select-none block leading-none">
+                  format_quote
+                </span>
+                
+                <p className="italic text-sm sm:text-base text-on-surface-variant leading-relaxed">
+                  "{leader.quote}"
+                </p>
+
+                <div className="pt-2">
+                  <p className="text-base sm:text-lg font-semibold text-primary dark:text-white">
+                    {leader.name}
+                  </p>
+                  <p className="text-xs text-on-surface-variant/80 uppercase tracking-wider font-medium">
+                    {leader.title}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,37 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 @import "tailwindcss";
 
-
-/* 1. Define the class-based dark mode variant */
+/* 1. Class-based dark mode variant */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 2. Your Semantic CSS Variable Tokens */
+/* 2. Semantic CSS Variables (Pure Color & Visual Tokens) */
 :root {
-  --page-bg: #f8f9ff;
-  --card-bg: #ffffff;
-  --card-border: #c2c6d3;
-  --text-body: #0b1c30;
-  --text-sub: #424751;
-  --brand-primary: #003f83;
+  /* Colors - Light Mode (Exact match to .md file) */
+  --color-surface: #f8f9ff;
+  --color-surface-dim: #cbdbf5;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #dce9ff;
+  --color-surface-container-highest: #d3e4fe;
+  --color-on-surface: #0b1c30;
+  --color-on-surface-variant: #424751;
+  --color-inverse-surface: #213145;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-outline: #737783;
+  --color-outline-variant: #c2c6d3;
+  --color-surface-tint: #255dad;
+  --color-primary: #003f83;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1a56a6;
+  --color-on-primary-container: #b7ceff;
+  --color-inverse-primary: #abc7ff;
+  --color-secondary: #745b00;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #fdd355;
+  --color-on-secondary-container: #735a00;
+  --color-tertiary: #254069;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #3e5882;
+  --color-on-tertiary-container: #b5cfff;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #d7e2ff;
+  --color-primary-fixed-dim: #abc7ff;
+  --color-on-primary-fixed: #001b3f;
+  --color-on-primary-fixed-variant: #00458f;
+  --color-secondary-fixed: #ffe08b;
+  --color-secondary-fixed-dim: #ebc246;
+  --color-on-secondary-fixed: #241a00;
+  --color-on-secondary-fixed-variant: #584400;
+  --color-tertiary-fixed: #d6e3ff;
+  --color-tertiary-fixed-dim: #adc7f8;
+  --color-on-tertiary-fixed: #001b3d;
+  --color-on-tertiary-fixed-variant: #2c4770;
+  --color-background: #f8f9ff;
+  --color-on-background: #0b1c30;
+  --color-surface-variant: #d3e4fe;
+
+  /* Custom Elevation & Gradients */
+  --primary-gradient: linear-gradient(135deg, #003f83 0%, #001b3f 100%);
+  --premium-shadow: 0 10px 30px -10px rgba(13, 44, 84, 0.08);
 }
 
-/* Dark mode token overrides */
+/* Dark Mode Overrides */
 .dark {
-  --page-bg: #0b1c30;
-  --card-bg: #11253e;
-  --card-border: #213145;
-  --text-body: #eaf1ff;
-  --text-sub: #a0aec0;
-  --brand-primary: #3b82f6;
+  --color-surface: #0b1c30;
+  --color-surface-dim: #071220;
+  --color-surface-bright: #1b2d45;
+  --color-surface-container-lowest: #11253e;
+  --color-surface-container-low: #0f2037;
+  --color-surface-container: #172d4a;
+  --color-surface-container-high: #1e3656;
+  --color-surface-container-highest: #264166;
+  --color-on-surface: #eaf1ff;
+  --color-on-surface-variant: #a0aec0;
+  --color-inverse-surface: #f8f9ff;
+  --color-inverse-on-surface: #0b1c30;
+  --color-outline: #8c93a4;
+  --color-outline-variant: #213145;
+  --color-surface-tint: #abc7ff;
+  --color-primary: #abc7ff;
+  --color-on-primary: #002d61;
+  --color-primary-container: #00458f;
+  --color-on-primary-container: #d7e2ff;
+  --color-inverse-primary: #003f83;
+  --color-secondary: #ebc246;
+  --color-on-secondary: #3d2f00;
+  --color-secondary-container: #584400;
+  --color-on-secondary-container: #ffe08b;
+  --color-tertiary: #adc7f8;
+  --color-on-tertiary: #002f60;
+  --color-tertiary-container: #2c4770;
+  --color-on-tertiary-container: #d6e3ff;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #00458f;
+  --color-primary-fixed-dim: #002d61;
+  --color-on-primary-fixed: #d7e2ff;
+  --color-on-primary-fixed-variant: #abc7ff;
+  --color-secondary-fixed: #584400;
+  --color-secondary-fixed-dim: #3d2f00;
+  --color-on-secondary-fixed: #ffe08b;
+  --color-on-secondary-fixed-variant: #ebc246;
+  --color-tertiary-fixed: #2c4770;
+  --color-tertiary-fixed-dim: #002f60;
+  --color-on-tertiary-fixed: #d6e3ff;
+  --color-on-tertiary-fixed-variant: #adc7f8;
+  --color-background: #0b1c30;
+  --color-on-background: #eaf1ff;
+  --color-surface-variant: #213145;
+
+  --primary-gradient: linear-gradient(135deg, #002a5c 0%, #05101d 100%);
+  --premium-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* 3. Utility mapping for your theme tokens */
+/* 3. Theme Configuration Mapping (Only Semantic Color Tokens) */
 @theme {
-  --color-page-bg: var(--page-bg);
-  --color-card-bg: var(--card-bg);
-  --color-card-border: var(--card-border);
-  --color-text-body: var(--text-body);
-  --color-text-sub: var(--text-sub);
-  --color-brand-primary: var(--brand-primary);
+  --font-family-sans: "Inter", sans-serif;
+
+  --color-surface: var(--color-surface);
+  --color-surface-dim: var(--color-surface-dim);
+  --color-surface-bright: var(--color-surface-bright);
+  --color-surface-container-lowest: var(--color-surface-container-lowest);
+  --color-surface-container-low: var(--color-surface-container-low);
+  --color-surface-container: var(--color-surface-container);
+  --color-surface-container-high: var(--color-surface-container-high);
+  --color-surface-container-highest: var(--color-surface-container-highest);
+  --color-on-surface: var(--color-on-surface);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-inverse-surface: var(--color-inverse-surface);
+  --color-inverse-on-surface: var(--color-inverse-on-surface);
+  --color-outline: var(--color-outline);
+  --color-outline-variant: var(--color-outline-variant);
+  --color-surface-tint: var(--color-surface-tint);
+  --color-primary: var(--color-primary);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-on-primary-container: var(--color-on-primary-container);
+  --color-inverse-primary: var(--color-inverse-primary);
+  --color-secondary: var(--color-secondary);
+  --color-on-secondary: var(--color-on-secondary);
+  --color-secondary-container: var(--color-secondary-container);
+  --color-on-secondary-container: var(--color-on-secondary-container);
+  --color-tertiary: var(--color-tertiary);
+  --color-on-tertiary: var(--color-on-tertiary);
+  --color-tertiary-container: var(--color-tertiary-container);
+  --color-on-tertiary-container: var(--color-on-tertiary-container);
+  --color-error: var(--color-error);
+  --color-on-error: var(--color-on-error);
+  --color-error-container: var(--color-error-container);
+  --color-on-error-container: var(--color-on-error-container);
+  --color-primary-fixed: var(--color-primary-fixed);
+  --color-primary-fixed-dim: var(--color-primary-fixed-dim);
+  --color-on-primary-fixed: var(--color-on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--color-on-primary-fixed-variant);
+  --color-secondary-fixed: var(--color-secondary-fixed);
+  --color-secondary-fixed-dim: var(--color-secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--color-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--color-on-secondary-fixed-variant);
+  --color-tertiary-fixed: var(--color-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--color-tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--color-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--color-on-tertiary-fixed-variant);
+  --color-background: var(--color-background);
+  --color-on-background: var(--color-on-background);
+  --color-surface-variant: var(--color-surface-variant);
+}
+
+/* Helper Utilities */
+.primary-gradient {
+  background: var(--primary-gradient);
+  color: var(--color-on-primary);
+}
+
+.dark .primary-gradient {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+}
+.premium-shadow {
+  box-shadow: var(--premium-shadow);
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
 }

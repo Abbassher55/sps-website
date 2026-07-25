@@ -1,25 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'system');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'system');
   const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
-  // Apply dark mode class to <html> element (Syncing external DOM system)
+  // Apply dark mode class to <html> element
   useEffect(() => {
     const root = document.documentElement;
-    if (
-      theme === 'dark' ||
-      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    
+    const applyTheme = () => {
+      if (
+        theme === 'dark' ||
+        (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    };
+
+    applyTheme();
     localStorage.setItem('theme', theme);
+
+    // Listen for OS system theme changes if set to 'system'
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemChange = () => {
+      if (theme === 'system') applyTheme();
+    };
+
+    mediaQuery.addEventListener('change', handleSystemChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemChange);
   }, [theme]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsThemeDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -32,35 +58,33 @@ export default function Navbar() {
   ];
 
   const isActive = (path) => location.pathname === path;
-
-  // Helper function to close mobile menu on item click
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-page-bg shadow-sm border-b border-card-border/40 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 md:px-16 h-20 flex justify-between items-center">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-outline-variant/60 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
         
         {/* SPS Logo */}
         <div className="flex items-center gap-4">
-          <Link to="/" onClick={closeMobileMenu}>
+          <Link to="/" onClick={closeMobileMenu} className="flex items-center">
             <img 
               alt="SPS Logo" 
-              className="h-14 w-auto" 
+              className="h-12 sm:h-14 w-auto object-contain" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqn7oZ3yvltwtqphLb6f4sFBuUErHgTkPYsbliNvqubLvYwkoij7DaXdTT84MUYQysoE3iXvGh6cT9HU5YxJTLsTVKUYoiS3KUwx7SrbIWWNMzsOUriydPswuAT--Uuma7RWYR0qaa0lariM5xD0CYBKqcSlsGUckIryCJ0tmu4uKBtpmeC2Mru4ec073kKXdCElTpTA_f3PRKVeEKUZStOcabIpTrklk6r07np0DH4GogRDCTF4pl9uLthn_i45rdmTS-y6bnEQ"
             />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden xl:flex items-center gap-8 font-medium text-sm">
+        <div className="hidden xl:flex items-center gap-7 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`transition-colors ${
+              className={`relative py-1 transition-colors duration-200 ${
                 isActive(link.path)
-                  ? 'text-brand-primary border-b-2 border-brand-primary pb-1 font-semibold dark:text-blue-400 dark:border-blue-400'
-                  : 'text-text-sub hover:text-brand-primary dark:hover:text-blue-400'
+                  ? 'text-primary font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full'
+                  : 'text-on-surface-variant hover:text-primary'
               }`}
             >
               {link.name}
@@ -68,55 +92,49 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Action Controls: Theme Switcher, Register Button & Mobile Menu */}
+        {/* Action Controls */}
         <div className="flex items-center gap-3">
           
-          {/* Desktop Theme Selector Dropdown */}
-          <div className="relative hidden sm:block">
+          {/* Theme Switcher Dropdown (Desktop & Tablet) */}
+          <div className="relative hidden sm:block" ref={dropdownRef}>
             <button
               onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
-              className="p-2.5 rounded-xl border border-card-border/60 bg-card-bg text-text-body hover:border-brand-primary dark:hover:border-blue-400 transition-colors flex items-center justify-center shadow-xs"
+              className="p-2.5 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface hover:border-primary transition-colors flex items-center justify-center shadow-xs"
               aria-label="Select Theme"
             >
-              <span className="material-symbols-outlined text-xl">
+              <span className="material-symbols-outlined text-xl select-none">
                 {theme === 'dark' ? 'dark_mode' : theme === 'light' ? 'light_mode' : 'desktop_windows'}
               </span>
             </button>
 
             {isThemeDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-36 bg-card-bg border border-card-border/60 rounded-xl shadow-xl py-2 z-50">
-                <button
-                  onClick={() => { setTheme('light'); setIsThemeDropdownOpen(false); }}
-                  className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2.5 transition-colors ${
-                    theme === 'light' ? 'text-brand-primary font-semibold' : 'text-text-body hover:bg-page-bg'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-lg">light_mode</span> Light
-                </button>
-                <button
-                  onClick={() => { setTheme('dark'); setIsThemeDropdownOpen(false); }}
-                  className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2.5 transition-colors ${
-                    theme === 'dark' ? 'text-brand-primary font-semibold' : 'text-text-body hover:bg-page-bg'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-lg">dark_mode</span> Dark
-                </button>
-                <button
-                  onClick={() => { setTheme('system'); setIsThemeDropdownOpen(false); }}
-                  className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2.5 transition-colors ${
-                    theme === 'system' ? 'text-brand-primary font-semibold' : 'text-text-body hover:bg-page-bg'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-lg">desktop_windows</span> System
-                </button>
+              <div className="absolute right-0 mt-2 w-36 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-lg py-1.5 z-50 overflow-hidden">
+                {[
+                  { key: 'light', label: 'Light', icon: 'light_mode' },
+                  { key: 'dark', label: 'Dark', icon: 'dark_mode' },
+                  { key: 'system', label: 'System', icon: 'desktop_windows' },
+                ].map((item) => (
+                  <button
+                    key={item.key}
+                    onClick={() => { setTheme(item.key); setIsThemeDropdownOpen(false); }}
+                    className={`w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 transition-colors ${
+                      theme === item.key 
+                        ? 'bg-surface-container-high text-primary font-semibold' 
+                        : 'text-on-surface hover:bg-surface-container-low'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-lg">{item.icon}</span> 
+                    {item.label}
+                  </button>
+                ))}
               </div>
             )}
           </div>
 
-          {/* Call to Action */}
+          {/* Call to Action Button */}
           <Link 
             to="/register" 
-            className="hidden sm:block bg-brand-primary text-white  dark:bg-[#c5a853]   px-8 py-3 rounded-xl font-medium text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
+            className="hidden sm:inline-flex items-center justify-center primary-gradient text-on-primary px-6 py-2.5 rounded-xl text-sm font-semibold hover:opacity-95 hover:scale-[1.02] active:scale-95 transition-all shadow-xs"
           >
             Register Now
           </Link>
@@ -124,21 +142,21 @@ export default function Navbar() {
           {/* Quick Mobile Theme Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="sm:hidden p-2 rounded-xl border border-card-border/60 text-text-body flex items-center"
+            className="sm:hidden p-2 rounded-xl border border-outline-variant text-on-surface bg-surface-container-lowest flex items-center justify-center"
             aria-label="Toggle dark mode"
           >
-            <span className="material-symbols-outlined text-xl">
+            <span className="material-symbols-outlined text-xl select-none">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>
           </button>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="xl:hidden p-2 text-text-body focus:outline-none"
+            className="xl:hidden p-2 text-on-surface hover:text-primary focus:outline-none flex items-center justify-center"
             aria-label="Toggle navigation menu"
           >
-            <span className="material-symbols-outlined text-3xl">
+            <span className="material-symbols-outlined text-2xl select-none">
               {isMobileMenuOpen ? 'close' : 'menu'}
             </span>
           </button>
@@ -146,9 +164,9 @@ export default function Navbar() {
 
       </div>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden border-t border-card-border/50 bg-page-bg px-6 py-6 space-y-3 transition-colors">
+        <div className="xl:hidden border-t border-outline-variant/60 bg-background px-4 pt-3 pb-6 space-y-2 shadow-lg">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -156,8 +174,8 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={`block px-4 py-3 rounded-xl text-base font-medium transition-colors ${
                 isActive(link.path)
-                  ? 'bg-brand-primary text-white dark:bg-blue-500 dark:text-gray-950'
-                  : 'text-text-body hover:bg-card-bg'
+                  ? 'bg-primary text-on-primary font-semibold'
+                  : 'text-on-surface hover:bg-surface-container-low'
               }`}
             >
               {link.name}
@@ -167,7 +185,7 @@ export default function Navbar() {
             <Link
               to="/register"
               onClick={closeMobileMenu}
-              className="block w-full text-center bg-brand-primary text-white dark:bg-blue-500 dark:text-gray-950 py-3 rounded-xl font-medium shadow-md"
+              className="block w-full text-center primary-gradient text-on-primary py-3 rounded-xl text-base font-semibold shadow-xs"
             >
               Register Now
             </Link>
