@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isThemeDropdownOpen, setIsThemeDropdownOpen] = useState(false);
   const location = useLocation();
 
-  // Apply dark mode class to <html> element
+  // Apply dark mode class to <html> element (Syncing external DOM system)
   useEffect(() => {
     const root = document.documentElement;
     if (
@@ -21,11 +21,6 @@ export default function Navbar() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Auto-close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
@@ -38,13 +33,16 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path;
 
+  // Helper function to close mobile menu on item click
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   return (
-    <nav className="sticky top-0 z-50 bg-page-bg/80 backdrop-blur-md shadow-sm border-b border-card-border/40 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-page-bg shadow-sm border-b border-card-border/40 transition-colors duration-300">
       <div className="max-w-[1280px] mx-auto px-6 md:px-16 h-20 flex justify-between items-center">
         
         {/* SPS Logo */}
         <div className="flex items-center gap-4">
-          <Link to="/">
+          <Link to="/" onClick={closeMobileMenu}>
             <img 
               alt="SPS Logo" 
               className="h-14 w-auto" 
@@ -155,6 +153,7 @@ export default function Navbar() {
             <Link
               key={link.path}
               to={link.path}
+              onClick={closeMobileMenu}
               className={`block px-4 py-3 rounded-xl text-base font-medium transition-colors ${
                 isActive(link.path)
                   ? 'bg-brand-primary text-white dark:bg-blue-500 dark:text-gray-950'
@@ -167,6 +166,7 @@ export default function Navbar() {
           <div className="pt-2">
             <Link
               to="/register"
+              onClick={closeMobileMenu}
               className="block w-full text-center bg-brand-primary text-white dark:bg-blue-500 dark:text-gray-950 py-3 rounded-xl font-medium shadow-md"
             >
               Register Now
