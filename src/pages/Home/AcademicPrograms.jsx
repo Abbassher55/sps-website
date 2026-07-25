@@ -25,7 +25,7 @@ const programs = [
 export default function AcademicPrograms() {
   return (
     <section className="bg-surface-container-low">
-      <div className="py-20 max-w-[1280px] mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
+      <div className="py-20 max-w-7xl mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
           <div className="max-w-xl">
             <p className="font-label-md text-primary tracking-[0.2em] uppercase">Educational Pathways</p>
@@ -38,8 +38,8 @@ export default function AcademicPrograms() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {programs.map((program, idx) => (
-            <div key={idx} className="bg-white p-2 rounded-[2rem] border border-outline-variant premium-shadow group cursor-pointer">
-              <div className="h-48 rounded-[1.8rem] overflow-hidden mb-6">
+            <div key={idx} className="bg-white overflow-hidden rounded-2xl border border-outline-variant premium-shadow group cursor-pointer">
+              <div className="h-48 overflow-hidden mb-6">
                 <img 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   src={program.image} 
@@ -47,9 +47,9 @@ export default function AcademicPrograms() {
                 />
               </div>
               <div className="p-6 pt-0">
-                <h4 className="font-headline-md text-primary mb-2">{program.title}</h4>
-                <p className="text-body-md text-on-surface-variant mb-6">{program.desc}</p>
-                <a className="w-full inline-flex items-center justify-center gap-2 bg-surface-container py-3 rounded-xl text-primary font-bold hover:primary-gradient hover:text-white transition-all" href="#">
+                <h4 className="font-headline-md text-primary  dark:text-secondary mb-2">{program.title}</h4>
+                <p className="text-body-md text-on-surface-variant mb-6 dark">{program.desc}</p>
+                <a className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-primary text-on-primary dark:bg-secondary-fixed dark:text-on-secondary-fixed font-bold hover:primary-gradient hover:text-white transition-all" href="#">
                   Apply Now <span className="material-symbols-outlined text-sm">open_in_new</span>
                 </a>
               </div>

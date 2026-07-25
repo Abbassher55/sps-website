@@ -27,7 +27,7 @@ export default function WhyChooseSps() {
   ];
 
   return (
-    <section className="dark:bg-surface-dim py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <section className="bg-surface-container-low dark:bg-surface-dim py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto mb-16">
         <p className="text-xs font-semibold text-primary dark:text-secondary tracking-[0.2em] uppercase">
