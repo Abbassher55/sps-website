@@ -52,11 +52,11 @@ export default function Testimonials() {
 
   return (
     <section className="bg-surface relative overflow-hidden">
-      <div className="py-20 max-w-[1280px] mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
+      <div className="py-20 max-w-7xl mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
         
         {/* Header Block */}
         <div className="text-center mb-16">
-          <p className="font-label-md text-primary tracking-[0.2em] uppercase font-semibold text-sm">
+          <p className="font-label-md text-primary dark:text-secondary tracking-[0.2em] uppercase font-semibold text-sm">
             Voices of our Community
           </p>
           <h2 className="font-headline-lg text-on-background text-4xl font-bold mt-2">
@@ -72,10 +72,10 @@ export default function Testimonials() {
           >
             {testimonials.map((t, idx) => (
               <div key={idx} className="w-full md:w-1/2 shrink-0 px-4">
-                <div className={`p-10 rounded-[2rem] border relative h-full transition-all duration-300 premium-shadow flex flex-col justify-between ${
+                <div className={`p-10 rounded-4xl border relative h-full transition-all duration-300 premium-shadow flex flex-col justify-between ${
                   t.featured 
-                    ? "bg-surface border-primary text-on-background" 
-                    : "bg-white border-outline-variant text-on-background"
+                    ? "bg-primary dark:bg-surface border-primary text-on-background" 
+                    : "bg-surface-container-lowest dark:bg-surface-container  border-outline-variant text-on-background"
                 }`}>
                   
                   <div>
@@ -90,22 +90,41 @@ export default function Testimonials() {
                         <img className="w-full h-full object-cover" src={t.image} alt={t.name} />
                       </div>
                       <div>
-                        <p className="font-headline-md text-[18px] font-bold text-on-background">{t.name}</p>
-                        <p className="text-sm font-medium text-primary">{t.role}</p>
+                        <p className={`font-headline-md text-[18px] font-bold ${t.featured 
+                        ? "text-white" 
+                        : "text-primary"
+                       }`}>{t.name}</p>
+                        <p className={`text-sm font-medium text-primary ${t.featured 
+                        ? "text-white" 
+                        : "text-primary"
+                       }`}>{t.role}</p>
                       </div>
                     </div>
 
-                    <p className="text-base text-on-surface-variant italic leading-relaxed">
+                    <p className={`text-base ${t.featured 
+                        ? "text-white" 
+                        : "text-primary"
+                       } italic leading-relaxed`}>
                       "{t.text}"
                     </p>
                   </div>
 
                   {t.action && (
                     <div className="mt-8 flex items-center gap-2 cursor-pointer w-fit group">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        <span className="material-symbols-outlined text-sm">play_arrow</span>
+                      <div className={`w-10 h-10 rounded-full dark:bg-primary/10 flex items-center justify-center dark:group-hover:bg-primary
+                      group-hover:bg-surface transition-all duration-300 bg-secondary ${t.featured 
+                        ? "text-white" 
+                        : "text-primary"
+                       }`} >
+                        <span className={`material-symbols-outlined transition-all duration-300 text-sm ${t.featured 
+                        ? "text-white group-hover:text-primary" 
+                        : "text-primary dark:group-hover:text-white"
+                       }`}>play_arrow</span>
                       </div>
-                      <span className="text-sm font-semibold text-primary group-hover:underline">
+                      <span className={`text-sm font-semibold group-hover:underline ${t.featured 
+                        ? "text-white" 
+                        : "text-primary"
+                       }`}>
                         {t.action}
                       </span>
                     </div>
@@ -120,7 +139,7 @@ export default function Testimonials() {
             <button 
               onClick={handlePrev} 
               disabled={currentIndex === 0}
-              className={`w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-white transition-all duration-300 ${
+              className={`w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-white dark:bg-secondary transition-all duration-300 ${
                 currentIndex === 0 
                   ? "opacity-40 cursor-not-allowed text-on-surface-variant" 
                   : "text-on-background hover:border-primary hover:text-primary"
@@ -133,7 +152,7 @@ export default function Testimonials() {
             <button 
               onClick={handleNext} 
               disabled={currentIndex >= maxIndex}
-              className={`w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-white transition-all duration-300 ${
+              className={`w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center bg-white dark:bg-secondary transition-all duration-300 ${
                 currentIndex >= maxIndex 
                   ? "opacity-40 cursor-not-allowed text-on-surface-variant" 
                   : "text-on-background hover:border-primary hover:text-primary"

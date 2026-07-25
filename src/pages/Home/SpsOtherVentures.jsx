@@ -19,15 +19,15 @@ const ventures = [
 export default function SpsOtherVentures() {
   return (
     <section className="bg-surface">
-      <div className="py-20 max-w-[1280px] mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
+      <div className="py-20 max-w-7xl mx-auto px-4 md:px-16 transition-all duration-700 opacity-100 translate-y-0">
         <div className="text-center mb-16">
-          <p className="font-label-md text-primary tracking-[0.2em] uppercase">Beyond Academics</p>
+          <p className="font-label-md text-primary tracking-[0.2em] uppercase dark:text-secondary">Beyond Academics</p>
           <h2 className="font-headline-lg text-on-background text-4xl font-bold">SPS OTHER VENTURES</h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {ventures.map((venture, idx) => (
-            <div key={idx} className="bg-white rounded-[2rem] overflow-hidden border border-outline-variant premium-shadow group">
+            <div key={idx} className="bg-surface-container-lowest dark:bg-surface-container rounded-4xl overflow-hidden border border-outline-variant premium-shadow group">
               <div className="h-56 relative overflow-hidden">
                 <img 
                   alt={venture.title} 
@@ -36,7 +36,7 @@ export default function SpsOtherVentures() {
                 />
               </div>
               <div className="p-8">
-                <h4 className="font-headline-md text-primary mb-3 font-bold text-xl">{venture.title}</h4>
+                <h4 className="font-headline-md text-primary mb-3 font-bold text-xl dark:text-secondary">{venture.title}</h4>
                 <p className="text-body-md text-on-surface-variant leading-relaxed">{venture.desc}</p>
               </div>
             </div>

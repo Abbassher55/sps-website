@@ -38,7 +38,7 @@ export default function AcademicPrograms() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {programs.map((program, idx) => (
-            <div key={idx} className="bg-white overflow-hidden rounded-2xl border border-outline-variant premium-shadow group cursor-pointer">
+            <div key={idx} className="bg-surface-container-lowest dark:bg-surface-container overflow-hidden rounded-2xl border border-outline-variant premium-shadow group cursor-pointer">
               <div className="h-48 overflow-hidden mb-6">
                 <img 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
