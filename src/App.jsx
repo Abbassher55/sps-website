@@ -3,7 +3,7 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
-
+import Navbar from './components/common/Navbar';
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
       <div className="flex flex-col min-h-screen bg-white">
         {/* Header is outside Routes so it stays visible on every page */}
         <Header />
+        <Navbar/>
         
         {/* Main page content changes based on path */}
         <main className="flex-grow">

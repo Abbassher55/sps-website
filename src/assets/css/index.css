@@ -1,3 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
 @import "tailwindcss";
+
+
+/* 1. Define the class-based dark mode variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Your Semantic CSS Variable Tokens */
+:root {
+  --page-bg: #f8f9ff;
+  --card-bg: #ffffff;
+  --card-border: #c2c6d3;
+  --text-body: #0b1c30;
+  --text-sub: #424751;
+  --brand-primary: #003f83;
+}
+
+/* Dark mode token overrides */
+.dark {
+  --page-bg: #0b1c30;
+  --card-bg: #11253e;
+  --card-border: #213145;
+  --text-body: #eaf1ff;
+  --text-sub: #a0aec0;
+  --brand-primary: #3b82f6;
+}
+
+/* 3. Utility mapping for your theme tokens */
+@theme {
+  --color-page-bg: var(--page-bg);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-text-body: var(--text-body);
+  --color-text-sub: var(--text-sub);
+  --color-brand-primary: var(--brand-primary);
+}
